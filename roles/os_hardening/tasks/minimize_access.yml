@@ -1,7 +1,9 @@
 ---
 # GNU find returns non-zero when -L encounters filesystem loops such as
 # /usr/bin/X11 -> ., while continuing to report other matching files.
-# Treat loop-only diagnostics as expected but preserve all other find failures.
+# We keep -L rather than -H so symlinked directories discovered beneath the
+# configured search paths are still followed and hardened as before.
+# We treat treat loop-only diagnostics as expected but preserve all other find failures.
 # See: https://github.com/dev-sec/ansible-collection-hardening/issues/215
 #      https://github.com/dev-sec/ansible-collection-hardening/issues/815
 - name: Find files with write-permissions for group # noqa command-instead-of-shell
